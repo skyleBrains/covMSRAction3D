@@ -2,7 +2,7 @@ addpath('./libsvm-3-4.22/matlab')
 datadir=('./data');
 addpath('./MostJoint');
 
-actionSet='ActionSet2.txt';
+actionSet='ActionSet3.txt';
 nofJoints=20;
 noMostJoints =3;
 noAction =20;
@@ -78,6 +78,9 @@ for h=1:length(listLabel)
          [fullCovmat,Covmat] = calculateCovMats(Xnew', Ynew', Znew', t', nLevels,overlap,timevar);
         % Covmat = calculateCovMats(Xnew', Ynew', Znew', t', nLevels,overlap);
         covMattoVector = cell2mat(cellfun(@(x)(cell2mat(x)), reshape(Covmat, 1, []), 'UniformOutput', false));
+	if i==1
+		save('covmat1', 'covMattoVector');
+	end
         % normVec = normVec / (norm(normVec) + 1e-5);
         data_train =[data_train; covMattoVector];
         % size(rowdata3_train)
